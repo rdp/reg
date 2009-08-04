@@ -58,10 +58,10 @@ class IntegerSet
 
     while low<high 
     case num <=> @pieces[mid=high-low/2]
-      when 1: low=mid+1
-      when 0: return true
-      when -1: high=mid-1
-      when nil: return false
+      when 1; low=mid+1
+      when 0; return true
+      when -1; high=mid-1
+      when nil; return false
       else fail "didn't expect anything else from <=>"
     end
     end
@@ -91,9 +91,9 @@ class IntegerSet
         return(result == (self<=>other.last) and result)
       end
     
-      if    first> other: -1
-      elsif last < other: 1
-      elsif self===other: 0
+      if    first> other; -1
+      elsif last < other; 1
+      elsif self===other; 0
       end
       #else other's in our range, but not in the bitset, what else to do?
     end
@@ -236,11 +236,11 @@ class IntegerSet
   
     def |(other)
       case other
-      when Integer: return dup<<other    
-      when ::Range: huh
-      when Range: huh
-      when Fragment: huh
-      when Set: #??
+      when Integer; return dup<<other    
+      when ::Range; huh
+      when Range; huh
+      when Fragment; huh
+      when Set; #??
         result=dup
         other.each{|i| result<<i }
       else huh
@@ -250,11 +250,11 @@ class IntegerSet
     
     def &(other)
       case other
-      when Integer: return self===other && other    
-      when ::Range: huh
-      when Range: huh
-      when Fragment: huh
-      when Set: huh#??
+      when Integer; return self===other && other    
+      when ::Range; huh
+      when Range; huh
+      when Fragment; huh
+      when Set; huh#??
       else huh
       end
       huh

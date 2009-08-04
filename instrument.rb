@@ -33,8 +33,8 @@ class<<Instrument
     data.last.is_a? Hash and pretty_exprs= data.pop and pretty_exprs.each{|expr,name| pretty_exprs[expr]=name.to_s }
     exprs=data.map{|datum|
       case datum
-        when String,Symbol: datum.to_s
-        when Integer,Range: "args[#{datum}]"
+        when String,Symbol; datum.to_s
+        when Integer,Range; "args[#{datum}]"
         else datum.to_str
       end
     }

@@ -1,8 +1,8 @@
 module AttributeOrder
   def self.included(othermod)
     othermod.extend case othermod
-    when Class: ForClass
-    when Module: ForModule
+    when Class; ForClass
+    when Module; ForModule
     else raise ArgumentError    
     end
   end
@@ -65,9 +65,9 @@ module ForModule
     @COLUMN_ORDER and 
       @COLUMN_ORDER.map!{|ivar|
         ivar=case ivar
-        when Integer: @REG_ATTRIBUTE_ORDER[ivar]
-        when Symbol: ivar.to_s
-        when String: ivar
+        when Integer; @REG_ATTRIBUTE_ORDER[ivar]
+        when Symbol; ivar.to_s
+        when String; ivar
         else fail ArgumentError
         end
         

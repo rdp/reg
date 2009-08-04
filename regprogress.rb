@@ -750,10 +750,10 @@ end
       @undos_stack.each {|i|
         case i
         #every element of @variables should also be a sym in @undos_stack
-          when Symbol,String: 
+          when Symbol,String; 
             vars_copy.delete(i) or assert(false)
             
-          when Later,::Proc:
+          when Later,::Proc;
           else assert(false)
         end
       }
@@ -1040,8 +1040,8 @@ if defined? $MMATCH_PROGRESS  #ultimately, mmatch will take a progress, but unti
         @idx >= @orreg.regs.size and return nil
         x=@orreg.regs[@idx].mmatch(@progress) #hard spot
         result=case x
-          when MatchSet: @set=x;x.next_match
-          when Integer: @progress.cursor.readahead( x)
+          when MatchSet; @set=x;x.next_match
+          when Integer; @progress.cursor.readahead( x)
         end
       end
       a=RR[nil]*@orreg.regs.size
@@ -1123,7 +1123,7 @@ if defined? $MMATCH_PROGRESS  #ultimately, mmatch will take a progress, but unti
     def mmatch(pr)
       left=pr.cursor.restsize
       beg=@times.begin
-      if beg==left : [true,left]
+      if beg==left ; [true,left]
       elsif beg<left
         make_ms([left,@times.end].min,beg,pr)
       end
@@ -1137,7 +1137,7 @@ if defined? $MMATCH_PROGRESS  #ultimately, mmatch will take a progress, but unti
     def mmatch(pr)
       left=pr.cursor.restsize
       beg=@times.begin
-      if beg==left : [true,left]
+      if beg==left ; [true,left]
       elsif beg<left
         make_ms([left,@times.end].min,beg,pr)
       end
@@ -1510,7 +1510,7 @@ end
 if false  #work-around warnings in cursor
 warn "warning: ugly workaround for chatty sequence warnings"
 propNiller=proc do 
-    old_init=instance_method:initialize
+    old_init=instance_method;initialize
     
     define_method:initialize do|*args|
       @positions||=nil;@prop||=nil    

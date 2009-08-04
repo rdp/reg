@@ -39,7 +39,7 @@ about matchdata:
 begin
   raise LoadError.new if $DISABLE_BOC
   require 'binding_of_caller'
-rescue LoadError: 
+rescue LoadError 
   warn "No Binding.of_caller. Regexp#=== and Regexp#match only take Strings."
 end
 
@@ -294,7 +294,7 @@ private
     (frags=newrex.split( /((?:[^\\(\[\]$^]+|\\(?:[CM]-)*[^CMZA])*)/ )).each_index{|i|
       frag=frags[i]
       case frag
-        when "\\": 
+        when "\\" 
           if !incclass and frags[i+1][0,1]==buffanchor
             frags[i+1].slice! 0
             frag='(?!)'
@@ -311,9 +311,9 @@ private
             frag="(?=\n)"
             rewritten=true
           end
-        when "(": incclass or frags[i+1][0]==?? or groupnum+=1
-        when "[": incclass=true #ignore stuff til ]
-        when "]": incclass=false #stop ignoring stuff
+        when "("; incclass or frags[i+1][0]==?? or groupnum+=1
+        when "["; incclass=true #ignore stuff til ]
+        when "]"; incclass=false #stop ignoring stuff
       end
       newrex<<frag
     }
@@ -337,20 +337,20 @@ private
     (frags=to_s.split( /((?:[^\\(\[\]$^]+|\\(?:[CM]-)*[^CMZA])*)/ )).each_index{|i|
       frag=frags[i]
       case frag
-        when "\\": 
+        when "\\" 
           if !incclass and frags[i+1][0,1]==buffanchor
             frags[i+1].slice! 0
             frag="(\\#{buffanchor})"  #surround with ()
             addedgroups<<(groupnum+=1)
           end
-        when lineanchor: 
+        when lineanchor 
           unless incclass
             frag="(#{frag})"  #surround with ()
             addedgroups<<(groupnum+=1)
           end
-        when "(": incclass or frags[i+1][0]==?? or groupnum+=1
-        when "[": incclass=true #ignore stuff til ]
-        when "]": incclass=false #stop ignoring stuff
+        when "("; incclass or frags[i+1][0]==?? or groupnum+=1
+        when "["; incclass=true #ignore stuff til ]
+        when "]"; incclass=false #stop ignoring stuff
       end
       newrex<<frag
     }
@@ -431,9 +431,9 @@ MatchWriter=proc do #proc as module
       anchored||=false
       name=name.to_s
       name1by1=case name
-        when /^(.*)!$/: $1+'X'
-        when /^(.*)\?$/:$1+'Q'
-        when /^(.*)=$/: $1+'E'
+        when /^(.*)!$/; $1+'X'
+        when /^(.*)\?$/;$1+'Q'
+        when /^(.*)=$/; $1+'E'
         else name
       end+"_1by1"
       to_eval= %{
@@ -446,11 +446,11 @@ MatchWriter=proc do #proc as module
             dat=md[0]
             consumed=md.end(0)
           when String
-            #{if anchored: "
+            #{if anchored "
               test= rex==(dat=read(rex.size) )
               self.pos-=consumed=dat.size
               test or return
-            " else "
+            " ;else "
               dat=read(len)
               self.pos-=dat.size
               dat.scan rex
@@ -585,9 +585,9 @@ class SubFile
   
   def seek(amt,whence=IO::SEEK_SET)
     case whence
-      when IO::SEEK_CUR: 
-      when IO::SEEK_SET: amt+=@offset
-      when IO::SEEK_END: amt+=@offset+@len;whence=IO::SEEK_SET
+      when IO::SEEK_CUR; 
+      when IO::SEEK_SET; amt+=@offset
+      when IO::SEEK_END; amt+=@offset+@len;whence=IO::SEEK_SET
     end
     result=@file.seek(amt,whence)
     fixup_pos
@@ -596,9 +596,9 @@ class SubFile
   
   def sysseek(amt,whence=IO::SEEK_SET)
     case whence
-      when IO::SEEK_CUR: 
-      when IO::SEEK_SET: amt+=@offset
-      when IO::SEEK_END: amt+=@offset+@len;whence=IO::SEEK_SET
+      when IO::SEEK_CUR; 
+      when IO::SEEK_SET; amt+=@offset
+      when IO::SEEK_END; amt+=@offset+@len;whence=IO::SEEK_SET
     end
     result=@file.sysseek(amt,whence)
     fixup_pos
